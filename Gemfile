@@ -10,6 +10,8 @@ gem 'sqlite3'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 
+gem 'openssl'
+
 gem 'email_validator'
 
 # Reduces boot times through caching; required in config/boot.rb
