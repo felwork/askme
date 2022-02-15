@@ -1,4 +1,5 @@
 require 'openssl'
+require 'email_validator'
 
 class User < ApplicationRecord
   ITERATIONS = 20000
@@ -8,6 +9,9 @@ class User < ApplicationRecord
 
   validates :email, :username, presence: true
   validates :email, :username, uniqueness: true
+  validates :email, email: true
+  validates :username, length: { maximum: 40 }
+  validates :username, format: { with: /\A\w+\z/ }
 
   attr_accessor :password
 
