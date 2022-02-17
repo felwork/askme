@@ -15,14 +15,14 @@ class User < ApplicationRecord
   validates :password, confirmation: true
 
   before_save :encrypt_password
-  before_validation :downcase_name_and_email, on: :create
+  before_validation :downcase_name_and_email
 
   def self.hash_to_string(password_hash)
     password_hash.unpack('H*')[0]
   end
 
   def self.authenticate(email, password)
-    user = find_by(email: email)
+    user = find_by(email: email.downcase)
 
     user if user.present? && user.password_hash == User.hash_to_string(
       OpenSSL::PKCS5.pbkdf2_hmac(password, user.password_salt, ITERATIONS, DIGEST.length, DIGEST)
