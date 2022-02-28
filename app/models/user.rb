@@ -42,7 +42,7 @@ class User < ApplicationRecord
   end
 
   def downcase_name_and_email
-    username&.downcase!
-    email&.downcase!
+    self.username = username.downcase
+    self.email = email.downcase
   end
 end
